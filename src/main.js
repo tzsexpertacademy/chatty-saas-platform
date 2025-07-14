@@ -1,5 +1,13 @@
 const { useState, useEffect } = React;
 
+// Configurar Tailwind para usar modo escuro baseado no sistema
+tailwind.config = {
+  darkMode: 'media',
+  theme: {
+    extend: {}
+  }
+};
+
 // API service para comunicar com backend
 const api = {
   async getInstances() {
@@ -152,11 +160,15 @@ function Dashboard() {
                 React.createElement('div', { className: 'space-y-2' },
                   React.createElement('button', {
                     onClick: () => connectInstance(instance.instanceName),
-                    className: 'w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors'
+                    className: 'w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium'
                   }, 'Conectar'),
                   React.createElement('button', {
+                    onClick: () => window.open(`/instance/${instance.instanceName}`, '_blank'),
+                    className: 'w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium'
+                  }, 'Gerenciar'),
+                  React.createElement('button', {
                     onClick: () => window.open(`/api/instance/qrcode/${instance.instanceName}`, '_blank'),
-                    className: 'w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors'
+                    className: 'w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm font-medium'
                   }, 'Ver QR Code')
                 )
               )
